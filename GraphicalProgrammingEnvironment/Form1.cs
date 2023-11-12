@@ -16,12 +16,16 @@ namespace GraphicalProgrammingEnvironment
         public Point cursorPosition;
         public PenColorManager PenColorManager;
         public Circle Circle;
+        public Triangle Triangle;
+        public Rectangle Rectangle;
         public Form1()
         {
             InitializeComponent();
             pictureBox1.Paint += pictureBox1_Paint;
             PenColorManager = new PenColorManager(this);
             Circle = new Circle(this);
+            Triangle = new Triangle(this);
+            Rectangle = new Rectangle(this);
 
         }
 
@@ -84,6 +88,12 @@ namespace GraphicalProgrammingEnvironment
 
                     case "circle":
                         Circle.ProcessCircleCommand(commandPart);
+                        break;
+                    case "triangle":
+                        Triangle.ProcessTriangleCommand(commandPart);
+                        break;
+                    case "rectangle":
+                        Rectangle.ProcessRectangleCommand(commandPart);
                         break;
 
                     case "moveto":

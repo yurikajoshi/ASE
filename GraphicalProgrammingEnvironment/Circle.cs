@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+using GraphicalProgrammingEnvironment;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GraphicalProgrammingEnvironment
 {
     public class Circle : Shape
     {
-        private Color currentPenColor; // Store the current pen color
+        private Color currentPenColor; // Stores the current pen color
 
         public Circle(Form1 form) : base(form)
         {
-            currentPenColor = Color.Black; // Default pen color is black
+            currentPenColor = Color.Yellow; // Default pen color is yellow
         }
 
         public void ProcessCircleCommand(string[] commandSyntax)
@@ -28,6 +26,7 @@ namespace GraphicalProgrammingEnvironment
                 MessageBox.Show("Invalid 'circle' command. Please use 'circle <radius>'.");
             }
         }
+
         private void DrawCircle(int radius)
         {
             PictureBox pictureBox = formInstance.GetPictureBox();
@@ -37,7 +36,7 @@ namespace GraphicalProgrammingEnvironment
                 int x = (int)(formInstance.CursorPosition.X - radius);
                 int y = (int)(formInstance.CursorPosition.Y - radius);
 
-                // Use the current pen color when drawing the circle
+                // Uses the current pen color when drawing the circle
                 using (Pen pen = new Pen(currentPenColor, 2))
                 {
                     g.DrawEllipse(pen, x, y, diameter, diameter);
@@ -45,11 +44,10 @@ namespace GraphicalProgrammingEnvironment
             }
         }
 
-        // Set the current pen color
+        // Sets the current pen color
         public void SetPenColor(Color color)
         {
             currentPenColor = color;
         }
     }
-
 }
