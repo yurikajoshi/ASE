@@ -18,6 +18,7 @@ namespace GraphicalProgrammingEnvironment
         public Circle Circle;
         public Triangle Triangle;
         public Rectangle Rectangle;
+       
         public Form1()
         {
             InitializeComponent();
@@ -42,9 +43,26 @@ namespace GraphicalProgrammingEnvironment
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string command = textBox1.Text.Trim();
-            ProcessCommand(command);
-    
+            string textFromTextBox2 = textBox2.Text;
+            string textFromTextBox1 = textBox1.Text;
+
+            if (!string.IsNullOrEmpty(textFromTextBox1) & string.IsNullOrEmpty(textFromTextBox2))
+
+            {
+                // Get the command entered in the text box
+                string command = textBox1.Text.Trim();
+                ProcessCommand(command);
+
+            }
+            else if (!string.IsNullOrEmpty(textFromTextBox2) & string.IsNullOrEmpty(textFromTextBox1))
+            {
+                string[] splitCommands = textFromTextBox2.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries); //store split commands
+                foreach (string commandLine in splitCommands)
+                {
+                    string singlelineCode = commandLine.Trim(); //store single line codes
+                    ProcessCommand(singlelineCode);
+                }
+            }
         }
 
         public void RefreshPictureBox()
@@ -75,7 +93,8 @@ namespace GraphicalProgrammingEnvironment
 
         public void ProcessCommand(string command)
         {
-            string[] commandPart = command.Split(' ');
+            string newCommand = command.Replace(',', ' ');
+            string[] commandPart = newCommand.Split(' ');
             if (commandPart.Length > 0)
             {
                 string finalCommand = commandPart[0].ToLower();
@@ -92,6 +111,7 @@ namespace GraphicalProgrammingEnvironment
                     case "triangle":
                         Triangle.ProcessTriangleCommand(commandPart);
                         break;
+
                     case "rectangle":
                         Rectangle.ProcessRectangleCommand(commandPart);
                         break;
@@ -122,7 +142,8 @@ namespace GraphicalProgrammingEnvironment
 
        
 
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        private
+            void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             int starSize = 15; // Size of the star as needed
             int halfSize = starSize / 2;
@@ -153,5 +174,9 @@ namespace GraphicalProgrammingEnvironment
             e.Graphics.FillPolygon(Brushes.Yellow, starPoints);
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

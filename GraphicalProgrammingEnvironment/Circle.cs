@@ -15,9 +15,9 @@ namespace GraphicalProgrammingEnvironment
             currentPenColor = Color.Yellow; // Default pen color is yellow
         }
 
-        public void ProcessCircleCommand(string[] commandSyntax)
+        public void ProcessCircleCommand(string[] commandPart)
         {
-            if (commandSyntax.Length == 2 && int.TryParse(commandSyntax[1], out int radius))
+            if (commandPart.Length == 2 && int.TryParse(commandPart[1], out int radius))
             {
                 DrawCircle(radius);
             }

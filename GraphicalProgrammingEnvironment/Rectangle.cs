@@ -15,9 +15,9 @@ namespace GraphicalProgrammingEnvironment
             formInstance = form;
         }
 
-        public void ProcessRectangleCommand(string[] commandSyntax)
+        public void ProcessRectangleCommand(string[] commandPart)
         {
-            if (commandSyntax.Length == 3 && int.TryParse(commandSyntax[1], out int width) && int.TryParse(commandSyntax[2], out int height))
+            if (commandPart.Length == 3 && int.TryParse(commandPart[1], out int width) && int.TryParse(commandPart[2], out int height))
             {
                 DrawRectangle(width, height);
             }
