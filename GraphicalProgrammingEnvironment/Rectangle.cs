@@ -32,10 +32,10 @@ namespace GraphicalProgrammingEnvironment
             PictureBox pictureBox = formInstance.GetPictureBox();
             using (Graphics g = pictureBox.CreateGraphics())
             {
-                // Use the current pen color when drawing the rectangle
+                // Uses the current pen color when drawing the rectangle
                 using (Pen pen = formInstance.PenColorManager.GetCurrentPen())
                 {
-                    // Adjust the position based on the width and height
+                    // Adjusts the position based on the width and height
                     int x = formInstance.CursorPosition.X - width / 2;
                     int y = formInstance.CursorPosition.Y - height / 2;
 
