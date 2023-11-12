@@ -14,10 +14,15 @@ namespace GraphicalProgrammingEnvironment
     {
         Bitmap myBitmap = new Bitmap(412, 302);
         public Point cursorPosition;
+        public PenColorManager PenColorManager;
+        public Circle Circle;
         public Form1()
         {
             InitializeComponent();
             pictureBox1.Paint += pictureBox1_Paint;
+            PenColorManager = new PenColorManager(this);
+            Circle = new Circle(this);
+
         }
 
 
@@ -34,8 +39,7 @@ namespace GraphicalProgrammingEnvironment
         private void button3_Click(object sender, EventArgs e)
         {
             string command = textBox1.Text.Trim();
-            CursorMove moveCursor = new CursorMove(this); // Pass the current instance of Form1
-            moveCursor.ProcessMoveToCommand(command.Split(' '));
+            ProcessCommand(command);
     
         }
 
@@ -43,6 +47,27 @@ namespace GraphicalProgrammingEnvironment
         {
             pictureBox1.Refresh();
         }
+        public Point CursorPosition
+        {
+            get { return cursorPosition; }
+        }
+
+        public PictureBox GetPictureBox()
+        {
+            return pictureBox1;
+        }
+
+        public void SetCursorPosition(Point position)
+        {
+            cursorPosition = position;
+        }
+
+        public Color GetPixelColor(int x, int y)
+        {
+            return myBitmap.GetPixel(x, y);
+        }
+
+
 
         public void ProcessCommand(string command)
         {
@@ -52,13 +77,20 @@ namespace GraphicalProgrammingEnvironment
                 string finalCommand = commandPart[0].ToLower();
                 switch (finalCommand)
                 {
-                    
+
+                    case "pen":
+                        PenColorManager.ProcessPenCommand(command);
+                        break;
+
+                    case "circle":
+                        Circle.ProcessCircleCommand(commandPart);
+                        break;
 
                     case "moveto":
                         CursorMove c = new CursorMove(this); // Passes the current instance of Form1
                         c.ProcessMoveToCommand(commandPart);
-                        break;
-                
+                        break;                
+
                     default:
                         MessageBox.Show("Invalid command. Please use a valid command!");
                         break;
@@ -67,6 +99,9 @@ namespace GraphicalProgrammingEnvironment
 
             }
         }
+
+       
+
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             int starSize = 15; // Size of the star as needed
