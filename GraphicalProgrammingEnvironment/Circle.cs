@@ -22,6 +22,7 @@ namespace GraphicalProgrammingEnvironment
             {
                 if (commandPart.Length == 2 && int.TryParse(commandPart[1], out int radius))
                 {
+
                     DrawCircle(radius);
                 }
                 else

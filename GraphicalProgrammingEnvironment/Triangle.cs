@@ -16,13 +16,29 @@ namespace GraphicalProgrammingEnvironment
 
         public void ProcessTriangleCommand(string[] commandPart)
         {
-            if (commandPart.Length == 2 && int.TryParse(commandPart[1], out int sideLength))
+            try
             {
-                DrawTriangle(sideLength);
+                // Ensures that the array has at least 2 elements and the second element is a valid integer
+                if (commandPart.Length >= 2 && int.TryParse(commandPart[1], out int sideLength))
+                {
+                    DrawTriangle(sideLength);
+                }
+                else
+                {
+                    MessageBox.Show("Invalid 'triangle' command. Please use 'triangle <sideLength>'.");
+                }
             }
-            else
+            catch (FormatException)
+            {
+                MessageBox.Show("Invalid side length. Please provide a valid integer for the side length.");
+            }
+            catch (IndexOutOfRangeException)
             {
                 MessageBox.Show("Invalid 'triangle' command. Please use 'triangle <sideLength>'.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while processing the 'triangle' command: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -41,7 +57,7 @@ namespace GraphicalProgrammingEnvironment
                 int x3 = formInstance.CursorPosition.X + (int)(sideLength * Math.Sqrt(3) / 2);
                 int y3 = formInstance.CursorPosition.Y + sideLength / 2;
 
-                // Use the current pen color when drawing the triangle
+                // Uses the current pen color when drawing the triangle
                 using (Pen pen = new Pen(currentPenColor, 2))
                 {
                     g.DrawLine(pen, x1, y1, x2, y2);

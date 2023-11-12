@@ -5,7 +5,6 @@ using System.Windows.Forms;
 
 namespace GraphicalProgrammingEnvironment
 {
-
     public class Rectangle
     {
         private Form1 formInstance;
@@ -17,13 +16,29 @@ namespace GraphicalProgrammingEnvironment
 
         public void ProcessRectangleCommand(string[] commandPart)
         {
-            if (commandPart.Length == 3 && int.TryParse(commandPart[1], out int width) && int.TryParse(commandPart[2], out int height))
+            try
             {
-                DrawRectangle(width, height);
+                // Ensures that the array has at least 3 elements and the second and third elements are valid integers
+                if (commandPart.Length >= 3 && int.TryParse(commandPart[1], out int width) && int.TryParse(commandPart[2], out int height))
+                {
+                    DrawRectangle(width, height);
+                }
+                else
+                {
+                    MessageBox.Show("Invalid 'rectangle' command. Please use 'rectangle <width> <height>'.");
+                }
             }
-            else
+            catch (FormatException)
+            {
+                MessageBox.Show("Invalid width or height. Please provide valid integers for the width and height.");
+            }
+            catch (IndexOutOfRangeException)
             {
                 MessageBox.Show("Invalid 'rectangle' command. Please use 'rectangle <width> <height>'.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while processing the 'rectangle' command: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
