@@ -89,7 +89,17 @@ namespace GraphicalProgrammingEnvironment
                     case "moveto":
                         CursorMove c = new CursorMove(this); // Passes the current instance of Form1
                         c.ProcessMoveToCommand(commandPart);
-                        break;                
+                        break;
+                    case "clear":
+                        pictureBox1.Image = null;
+                        break;
+                    case "reset":
+                        pictureBox1.Image = null; // Clears the PictureBox by setting its Image property to null
+
+                        // Reset the cursor position
+                        cursorPosition = new Point(0, 0); // Assuming cursorPosition is declared globally
+                        pictureBox1.Refresh(); // Refresh the PictureBox to reflect the new cursor position
+                        break;
 
                     default:
                         MessageBox.Show("Invalid command. Please use a valid command!");
