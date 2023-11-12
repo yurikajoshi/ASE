@@ -30,6 +30,7 @@ namespace GraphicalProgrammingEnvironment
             Circle = new Circle(this);
             Triangle = new Triangle(this);
             Rectangle = new Rectangle(this);
+            cursorPosition = new Point(0, 0); // Initialize cursorPosition
 
         }
 
@@ -44,29 +45,46 @@ namespace GraphicalProgrammingEnvironment
 
         }
 
+
         private void button3_Click(object sender, EventArgs e)
         {
-            string textFromTextBox2 = textBox2.Text;
-            string textFromTextBox1 = textBox1.Text;
-
-            if (!string.IsNullOrEmpty(textFromTextBox1) & string.IsNullOrEmpty(textFromTextBox2))
-
+            try
             {
-                // Get the command entered in the text box
-                string command = textBox1.Text.Trim();
-                ProcessCommand(command);
+                string textFromTextBox1 = textBox1.Text;
+                string textFromTextBox2 = textBox2.Text;
 
-            }
-            else if (!string.IsNullOrEmpty(textFromTextBox2) & string.IsNullOrEmpty(textFromTextBox1))
-            {
-                string[] splitCommands = textFromTextBox2.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries); //store split commands
-                foreach (string commandLine in splitCommands)
+                if (!string.IsNullOrEmpty(textFromTextBox1) && string.IsNullOrEmpty(textFromTextBox2))
                 {
-                    string singlelineCode = commandLine.Trim(); //store single line codes
-                    ProcessCommand(singlelineCode);
+                    // Get the command entered in the text box
+                    string command = textBox1.Text.Trim();
+                    ProcessCommand(command);
+                }
+                else if (!string.IsNullOrEmpty(textFromTextBox2) && string.IsNullOrEmpty(textFromTextBox1))
+                {
+                    string[] storeSplitCommands = textFromTextBox2.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string commandLine in storeSplitCommands)
+                    {
+                        string stroreSinglelineCode = commandLine.Trim();
+                        ProcessCommand(stroreSinglelineCode);
+                    }
+                }
+                else
+                {
+                    throw new InvalidOperationException("Please enter a command in either textbox 1 or textbox 2, but not both.");
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+        
+        public Bitmap GetDrawingSurface()
+        {
+            return myBitmap; //  myBitmap is the Bitmap being used for drawing
+        }
+
 
         public void RefreshPictureBox()
         {
@@ -120,6 +138,12 @@ namespace GraphicalProgrammingEnvironment
                     case "rectangle":
                         Rectangle.ProcessRectangleCommand(commandPart);
                         break;
+                    case "drawto":
+                    case "to": // Adding shorthand command for drawto
+                        DrawTo drawTo = new DrawTo(this);
+                        drawTo.ProcessDrawToCommand(commandPart);
+                        break;
+
 
                     case "moveto":
                         CursorMove c = new CursorMove(this); // Passes the current instance of Form1
