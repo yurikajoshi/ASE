@@ -13,7 +13,7 @@ namespace GraphicalProgrammingEnvironment
 {
     public partial class Form1 : Form
     {
-        private List<string> commands = new List<string>();
+        private List<string> commands = new List<string>(); //creating a list to store the commands
 
         Bitmap myBitmap = new Bitmap(412, 302);
         public Point cursorPosition;
@@ -101,7 +101,7 @@ namespace GraphicalProgrammingEnvironment
             if (commandPart.Length > 0)
             {
                 string finalCommand = commandPart[0].ToLower();
-                // Add the processed command to the commands list
+                // Adds the processed command to the commands list
                 commands.Add(command);
                 switch (finalCommand)
                 {
@@ -145,6 +145,9 @@ namespace GraphicalProgrammingEnvironment
             }
         }
 
+        // <summary>
+        // Executes the stored commands by iterating through the list of commands and processing each one.
+        // </summary>
         private void ExecuteCommands()
         {
             List<string> commandsCopy = new List<string>(commands);
@@ -197,17 +200,25 @@ namespace GraphicalProgrammingEnvironment
         //for saving the program commands as a txt file
         private void button2_Click(object sender, EventArgs e)
         {
+            // Creates a SaveFileDialog to allow the user to choose the file location and name.
+
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
-            saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
-            saveFileDialog.DefaultExt = "txt";
-            saveFileDialog.AddExtension = true;
+
+            // Sets the filter to show only text files or all files.
+            saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"; 
+            saveFileDialog.DefaultExt = "txt"; // Sets the default file extension to txt.
+            saveFileDialog.AddExtension = true; //Adds extension automatically if user doesnt provide one
+            
+            //check if user selected a file and clicked OK in the dialog.
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
+                    // Open a StreamWriter to write to the selected file.
                     using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName))
                     {
+                        // Iterates through each command in the 'commands' collection and write it to the file.
                         foreach (string command in commands)
                         {
                             writer.WriteLine(command);
@@ -233,11 +244,11 @@ namespace GraphicalProgrammingEnvironment
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                // The user has selected a file, and openFileDialog.FileName contains the chosen file path.
-                // The commands are then loaded from this file.
+                // After user selects a file openFileDialog.FileName contains the chosen file path.
+                // The commands are then loaded from the file that has been created.
                 try
                 {
-                    commands.Clear(); // Clear existing commands
+                    commands.Clear(); // Clears existing commands
 
                     using (StreamReader reader = new StreamReader(openFileDialog.FileName))
                     {
@@ -248,7 +259,7 @@ namespace GraphicalProgrammingEnvironment
                         }
                     }
 
-                    ExecuteCommands(); // Execute the loaded commands
+                    ExecuteCommands(); // Executes the loaded commands
                     MessageBox.Show("Commands loaded successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
