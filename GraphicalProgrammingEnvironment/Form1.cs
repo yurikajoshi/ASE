@@ -13,7 +13,7 @@ namespace GraphicalProgrammingEnvironment
     public partial class Form1 : Form
     {
         Bitmap myBitmap = new Bitmap(412, 302);
-        private Point cursorPosition;
+        public Point cursorPosition;
         public Form1()
         {
             InitializeComponent();
@@ -33,19 +33,50 @@ namespace GraphicalProgrammingEnvironment
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            string command = textBox1.Text.Trim();
+            CursorMove moveCursor = new CursorMove(this); // Pass the current instance of Form1
+            moveCursor.ProcessMoveToCommand(command.Split(' '));
+    
         }
 
+        public void RefreshPictureBox()
+        {
+            pictureBox1.Refresh();
+        }
+
+        public void ProcessCommand(string command)
+        {
+            string[] commandPart = command.Split(' ');
+            if (commandPart.Length > 0)
+            {
+                string finalCommand = commandPart[0].ToLower();
+                switch (finalCommand)
+                {
+                    
+
+                    case "moveto":
+                        CursorMove c = new CursorMove(this); // Passes the current instance of Form1
+                        c.ProcessMoveToCommand(commandPart);
+                        break;
+                
+                    default:
+                        MessageBox.Show("Invalid command. Please use a valid command!");
+                        break;
+
+                }
+
+            }
+        }
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            int starSize = 20; // Adjust the size of the star as needed
+            int starSize = 15; // Size of the star as needed
             int halfSize = starSize / 2;
 
-            // Get the center of the star
+            // Gets the center of the star
             int centerX = cursorPosition.X;
             int centerY = cursorPosition.Y;
 
-            // Define the points for a 5-pointed star
+            // Defines the points for a 5-pointed star
             Point[] starPoints = new Point[10];
 
             for (int i = 0; i < 10; i++)
@@ -66,22 +97,6 @@ namespace GraphicalProgrammingEnvironment
             // Draw a Yellow star centered around the cursor position
             e.Graphics.FillPolygon(Brushes.Yellow, starPoints);
         }
-
-            private void DrawYellowStar(Graphics g, int x, int y)
-        {
-            // Define the points for a five-pointed star
-            Point[] starPoints = new Point[10];
-            for (int i = 0; i < 10; i++)
-            {
-                double angle = Math.PI / 5 * i;
-                double radius = i % 2 == 0 ? 10 : 5; // Alternating long and short radius
-                starPoints[i] = new Point((int)(x + radius * Math.Cos(angle)), (int)(y + radius * Math.Sin(angle)));
-            }
-
-            // Draw the star using a yellow brush
-            g.FillPolygon(Brushes.Yellow, starPoints);
-        }
-
 
     }
 }
