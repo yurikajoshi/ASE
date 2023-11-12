@@ -75,6 +75,7 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "Open";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -85,6 +86,7 @@
             this.button2.TabIndex = 4;
             this.button2.Text = "Save";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 

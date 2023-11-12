@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ namespace GraphicalProgrammingEnvironment
 {
     public partial class Form1 : Form
     {
+        private List<string> commands = new List<string>();
+
         Bitmap myBitmap = new Bitmap(412, 302);
         public Point cursorPosition;
         public PenColorManager PenColorManager;
@@ -98,6 +101,8 @@ namespace GraphicalProgrammingEnvironment
             if (commandPart.Length > 0)
             {
                 string finalCommand = commandPart[0].ToLower();
+                // Add the processed command to the commands list
+                commands.Add(command);
                 switch (finalCommand)
                 {
 
@@ -140,10 +145,19 @@ namespace GraphicalProgrammingEnvironment
             }
         }
 
-       
+        private void ExecuteCommands()
+        {
+            List<string> commandsCopy = new List<string>(commands);
 
-        private
-            void pictureBox1_Paint(object sender, PaintEventArgs e)
+            foreach (string command in commandsCopy)
+            {
+                ProcessCommand(command);
+            }
+        }
+
+
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             int starSize = 15; // Size of the star as needed
             int halfSize = starSize / 2;
@@ -174,9 +188,74 @@ namespace GraphicalProgrammingEnvironment
             e.Graphics.FillPolygon(Brushes.Yellow, starPoints);
         }
 
+
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        //for saving the program commands as a txt file
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            saveFileDialog.DefaultExt = "txt";
+            saveFileDialog.AddExtension = true;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName))
+                    {
+                        foreach (string command in commands)
+                        {
+                            writer.WriteLine(command);
+                        }
+                    }
+                    MessageBox.Show("Commands saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred while saving the commands: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+        }
+
+        //for loading a txt file
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            openFileDialog.DefaultExt = "txt";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                // The user has selected a file, and openFileDialog.FileName contains the chosen file path.
+                // The commands are then loaded from this file.
+                try
+                {
+                    commands.Clear(); // Clear existing commands
+
+                    using (StreamReader reader = new StreamReader(openFileDialog.FileName))
+                    {
+                        while (!reader.EndOfStream)
+                        {
+                            string command = reader.ReadLine();
+                            commands.Add(command);
+                        }
+                    }
+
+                    ExecuteCommands(); // Execute the loaded commands
+                    MessageBox.Show("Commands loaded successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred while loading the commands: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

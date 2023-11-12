@@ -16,31 +16,45 @@ namespace GraphicalProgrammingEnvironment
         }
 
         public void ProcessCircleCommand(string[] commandPart)
+
         {
-            if (commandPart.Length == 2 && int.TryParse(commandPart[1], out int radius))
+            try
             {
-                DrawCircle(radius);
+                if (commandPart.Length == 2 && int.TryParse(commandPart[1], out int radius))
+                {
+                    DrawCircle(radius);
+                }
+                else
+                {
+                    MessageBox.Show("Invalid 'circle' command. Please use 'circle <radius>'.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Invalid 'circle' command. Please use 'circle <radius>'.");
+                MessageBox.Show($"Error processing the circle command: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void DrawCircle(int radius)
         {
-            PictureBox pictureBox = formInstance.GetPictureBox();
-            using (Graphics g = pictureBox.CreateGraphics())
+            try
             {
-                int diameter = radius * 2;
-                int x = (int)(formInstance.CursorPosition.X - radius);
-                int y = (int)(formInstance.CursorPosition.Y - radius);
-
-                // Uses the current pen color when drawing the circle
-                using (Pen pen = new Pen(currentPenColor, 2))
+                PictureBox pictureBox = formInstance.GetPictureBox();
+                using (Graphics g = pictureBox.CreateGraphics())
                 {
-                    g.DrawEllipse(pen, x, y, diameter, diameter);
+                    int diameter = radius * 2;
+                    int x = (int)(formInstance.CursorPosition.X - radius);
+                    int y = (int)(formInstance.CursorPosition.Y - radius);
+
+                    // Uses the current pen color when drawing the circle
+                    using (Pen pen = new Pen(currentPenColor, 2))
+                    {
+                        g.DrawEllipse(pen, x, y, diameter, diameter);
+                    }
                 }
+            }
+            catch (Exception ex){
+                MessageBox.Show($"Error drawing circle: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
