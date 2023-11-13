@@ -26,9 +26,10 @@ namespace GraphicalProgrammingEnvironment
         public Triangle Triangle;
         public Rectangle Rectangle;
 
-       /// <summary>
-       /// Initializing new instance of the <see cref="Form1"/> class.
-       /// </summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// Sets up the drawing environment and initializes necessary components and objects.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -169,6 +170,7 @@ namespace GraphicalProgrammingEnvironment
 
         /// <summary>
         /// Processes the entered command and performs the corresponding action.
+        /// Supported commands include operations like drawing shapes and moving the cursor and other functionality for the graphical environment.
         /// The execution of fill on/off based on command given is present as well.
         /// </summary>
         /// <param name="command">The command to be processed.</param>
@@ -350,6 +352,7 @@ namespace GraphicalProgrammingEnvironment
 
         /// <summary>
         /// Loads a txt file when button1 or load button is clicked.
+        /// Allows the user to select a text file containing commands and loads them for execution.
         /// </summary>
         /// <param name="sender">The sender object.</param>
         /// <param name="e">The event arguments.</param>
@@ -369,6 +372,7 @@ namespace GraphicalProgrammingEnvironment
                 {
                     commands.Clear(); // Clears existing commands
 
+                    // Opens a StreamReader to read from the selected file.
                     using (StreamReader reader = new StreamReader(openFileDialog.FileName))
                     {
                         while (!reader.EndOfStream)

@@ -23,9 +23,11 @@ namespace GraphicalProgrammingEnvironment
         }
 
         /// <summary>
-        /// Processes the 'rectangle' command, drawing a rectangle with the specified width and height.
+        /// Processes the 'rectangle' command to draw a rectangle with specified dimensions.
         /// </summary>
-        /// <param name="commandPart">An array containing the command parts.</param>
+        /// <param name="commandPart">An array containing the command parts, where <c>commandPart[1]</c> is the width and <c>commandPart[2]</c> is the height of the rectangle.</param>
+        /// <exception cref="FormatException">Thrown when the width or height are not valid integers.</exception>
+        /// <exception cref="IndexOutOfRangeException">Thrown when the command does not have the required number of arguments.</exception>
         public void ProcessRectangleCommand(string[] commandPart)
         {
             try
@@ -60,6 +62,10 @@ namespace GraphicalProgrammingEnvironment
         /// </summary>
         /// <param name="width">The width of the rectangle.</param>
         /// <param name="height">The height of the rectangle.</param>
+        /// <remarks>
+        /// If fill is enabled in the form, the rectangle will be filled with the current pen color.
+        /// Otherwise, only the outline of the rectangle will be drawn.
+        /// </remarks>
         private void DrawRectangle(int width, int height)
         {
             PictureBox pictureBox = formInstance.GetPictureBox();

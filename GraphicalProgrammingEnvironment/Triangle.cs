@@ -22,12 +22,23 @@ namespace GraphicalProgrammingEnvironment
             currentPenColor = Color.Yellow; // Default pen color is yellow
         }
 
+        /// <summary>
+        /// Processes the 'triangle' command to draw an equilateral triangle with specified length of the side of the triangle.
+        /// </summary>
+        /// <param name="commandPart">An array containing the command and its parameters.</param>
+        /// <remarks>
+        /// The 'triangle' command expects at least two elements in the array:
+        ///   1. The command itself ('triangle').
+        ///   2. The side length of the triangle (an integer).
+        /// </remarks>
+        /// <exception cref="FormatException">Thrown when the side Length are not valid integer.</exception>
+        /// <exception cref="IndexOutOfRangeException">Thrown when the command does not have the required number of arguments.</exception>
         public void ProcessTriangleCommand(string[] commandPart)
         {
             try
             {
                 // Ensures that the array has at least 2 elements and the second element is a valid integer
-                if (commandPart.Length >= 2 && int.TryParse(commandPart[1], out int sideLength))
+                if (commandPart.Length == 2 && int.TryParse(commandPart[1], out int sideLength))
                 {
                     isFilled = formInstance.IsFillEnabled; // Get the fill status from the Form1 instance using the property
                     DrawTriangle(sideLength);
@@ -51,7 +62,14 @@ namespace GraphicalProgrammingEnvironment
             }
         }
 
-        // Modify the DrawTriangle method to fill the triangle if isFilled is true
+        /// <summary>
+        /// Draws an equilateral triangle based on the specified length of side around the cursor
+        /// </summary>
+        /// <param name="sideLength"></param>
+        /// <remarks>
+        /// If fill is enabled in the form, the triangle will be filled with the current pen color.
+        /// Otherwise, only the outline of the triangle will be drawn.
+        /// </remarks>
         private void DrawTriangle(int sideLength)
         {
             PictureBox pictureBox = formInstance.GetPictureBox();
