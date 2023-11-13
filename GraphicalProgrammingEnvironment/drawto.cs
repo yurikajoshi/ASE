@@ -2,17 +2,28 @@
 using System;
 using System.Drawing;
 
+/// <summary>
+/// Represents a class responsible for drawing lines in the graphical programming environment.
+/// </summary>
 public class DrawTo
 {
     private Form1 form;
     private Pen pen;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DrawTo"/> class.
+    /// </summary>
+    /// <param name="form">The main form instance.</param>
     public DrawTo(Form1 form)
     {
         this.form = form;
         this.pen = new Pen(Color.Yellow);
     }
 
+    /// <summary>
+    /// Processes the 'drawto' command, drawing a line from the current cursor position to the specified coordinates given by the user.
+    /// </summary>
+    /// <param name="commandPart">An array containing the command parts.</param>
     public void ProcessDrawToCommand(string[] commandPart)
     {
         try
