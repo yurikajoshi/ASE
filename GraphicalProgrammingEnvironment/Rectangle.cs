@@ -5,15 +5,26 @@ using System.Windows.Forms;
 
 namespace GraphicalProgrammingEnvironment
 {
+    /// <summary>
+    /// Represents a class responsible for drawing rectangles in the graphical programming environment.
+    /// </summary>
     public class Rectangle
     {
         private Form1 formInstance;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Rectangle"/> class.
+        /// </summary>
+        /// <param name="form">The main form instance.</param>
         public Rectangle(Form1 form)
         {
             formInstance = form;
         }
 
+        /// <summary>
+        /// Processes the 'rectangle' command, drawing a rectangle with the specified width and height.
+        /// </summary>
+        /// <param name="commandPart">An array containing the command parts.</param>
         public void ProcessRectangleCommand(string[] commandPart)
         {
             try
@@ -42,6 +53,11 @@ namespace GraphicalProgrammingEnvironment
             }
         }
 
+        /// <summary>
+        /// Draws a rectangle with the specified width and height at the current cursor position.
+        /// </summary>
+        /// <param name="width">The width of the rectangle.</param>
+        /// <param name="height">The height of the rectangle.</param>
         private void DrawRectangle(int width, int height)
         {
             PictureBox pictureBox = formInstance.GetPictureBox();
