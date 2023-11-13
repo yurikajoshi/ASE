@@ -6,15 +6,26 @@ using System.Windows.Forms;
 
 namespace GraphicalProgrammingEnvironment
 {
+    /// <summary>
+    /// Represents a circle shape in the graphical programming environment. Where circle is inheriting shape
+    /// </summary>
     public class Circle : Shape
     {
         private Color currentPenColor; // Stores the current pen color
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Circle"/> class.
+        /// </summary>
+        /// <param name="form">The main form instance.</param>
         public Circle(Form1 form) : base(form)
         {
             currentPenColor = Color.Yellow; // Default pen color is yellow
         }
 
+        /// <summary>
+        /// Processes the 'circle' command and draws a circle with the specified radius.
+        /// </summary>
+        /// <param name="commandPart">An array containing the command parts.</param>
         public void ProcessCircleCommand(string[] commandPart)
 
         {
@@ -36,6 +47,10 @@ namespace GraphicalProgrammingEnvironment
             }
         }
 
+        /// <summary>
+        /// Draws a circle with the specified radius at the current cursor position.
+        /// </summary>
+        /// <param name="radius">The radius of the circle.</param>
         private void DrawCircle(int radius)
         {
             try
@@ -59,7 +74,10 @@ namespace GraphicalProgrammingEnvironment
             }
         }
 
-        // Sets the current pen color
+        /// <summary>
+        /// Sets the current pen color for drawing circles.
+        /// </summary>
+        /// <param name="color">The color to set for the pen.</param>
         public void SetPenColor(Color color)
         {
             currentPenColor = color;
