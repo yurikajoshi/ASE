@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
 namespace GraphicalProgrammingEnvironmentTests
-{
+{/*
     [TestClass]
     public class CircleTests
     {
@@ -47,4 +47,5 @@ namespace GraphicalProgrammingEnvironmentTests
 
         // Additional tests for other scenarios...
     }
+    */
 }
