@@ -18,7 +18,7 @@ namespace GraphicalProgrammingEnvironment
     public partial class Form1 : Form
     {
         private List<string> commands = new List<string>(); //creating a list to store the commands
-
+        private bool isFillEnabled = false;
         Bitmap myBitmap = new Bitmap(412, 302); //bitmap used for drawing
         public Point cursorPosition;
         public PenColorManager PenColorManager;
@@ -39,6 +39,10 @@ namespace GraphicalProgrammingEnvironment
             Rectangle = new Rectangle(this);
             cursorPosition = new Point(0, 0); // Initializing the  cursorPosition
 
+        }
+        public bool IsFillEnabled
+        {
+            get { return isFillEnabled; }
         }
 
         /// <summary>
@@ -203,6 +207,24 @@ namespace GraphicalProgrammingEnvironment
                         // Reset the cursor position
                         cursorPosition = new Point(0, 0); // Assuming cursorPosition is declared globally
                         pictureBox1.Refresh(); // Refresh the PictureBox to reflect the new cursor position
+                        break;
+
+                    case "fill":
+                        if (commandPart.Length > 1)
+                        {
+                            if (commandPart[1].ToLower() == "on")
+                            {
+                                isFillEnabled = true;
+                            }
+                            else if (commandPart[1].ToLower() == "off")
+                            {
+                                isFillEnabled = false;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid 'fill' command. Please use 'fill on' or 'fill off'.");
+                        }
                         break;
 
                     default:

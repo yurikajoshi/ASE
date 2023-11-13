@@ -10,6 +10,7 @@ namespace GraphicalProgrammingEnvironment
     /// </summary>
     public class Triangle : Shape
     {
+        private bool isFilled;
         private Color currentPenColor; // Stores current pen color
 
         /// <summary>
@@ -21,10 +22,6 @@ namespace GraphicalProgrammingEnvironment
             currentPenColor = Color.Yellow; // Default pen color is yellow
         }
 
-        /// <summary>
-        /// Processes the 'triangle' command, drawing an equilateral triangle with the specified side length.
-        /// </summary>
-        /// <param name="commandPart">An array containing the command parts.</param>
         public void ProcessTriangleCommand(string[] commandPart)
         {
             try
@@ -32,6 +29,7 @@ namespace GraphicalProgrammingEnvironment
                 // Ensures that the array has at least 2 elements and the second element is a valid integer
                 if (commandPart.Length >= 2 && int.TryParse(commandPart[1], out int sideLength))
                 {
+                    isFilled = formInstance.IsFillEnabled; // Get the fill status from the Form1 instance using the property
                     DrawTriangle(sideLength);
                 }
                 else
@@ -53,10 +51,7 @@ namespace GraphicalProgrammingEnvironment
             }
         }
 
-        /// <summary>
-        /// Draws an equilateral triangle with the specified side length at the current cursor position.
-        /// </summary>
-        /// <param name="sideLength">The side length of the equilateral triangle.</param>
+        // Modify the DrawTriangle method to fill the triangle if isFilled is true
         private void DrawTriangle(int sideLength)
         {
             PictureBox pictureBox = formInstance.GetPictureBox();
@@ -75,9 +70,22 @@ namespace GraphicalProgrammingEnvironment
                 // Uses the current pen color when drawing the triangle
                 using (Pen pen = new Pen(currentPenColor, 2))
                 {
-                    g.DrawLine(pen, x1, y1, x2, y2);
-                    g.DrawLine(pen, x2, y2, x3, y3);
-                    g.DrawLine(pen, x3, y3, x1, y1);
+                    if (isFilled)
+                    {
+                        // Fills the triangle
+                        using (Brush brush = new SolidBrush(currentPenColor))
+                        {
+                            Point[] trianglePoints = { new Point(x1, y1), new Point(x2, y2), new Point(x3, y3) };
+                            g.FillPolygon(brush, trianglePoints);
+                        }
+                    }
+                    else
+                    {
+                        // Draws the outline of the triangle
+                        g.DrawLine(pen, x1, y1, x2, y2);
+                        g.DrawLine(pen, x2, y2, x3, y3);
+                        g.DrawLine(pen, x3, y3, x1, y1);
+                    }
                 }
             }
         }

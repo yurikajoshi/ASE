@@ -1,13 +1,14 @@
 ﻿using GraphicalProgrammingEnvironment;
 using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 /// <summary>
 /// Represents a class responsible for drawing lines in the graphical programming environment.
 /// </summary>
 public class DrawTo
 {
-    private Form1 form;
+    private Form1 form; 
     private Pen pen;
 
     /// <summary>
@@ -47,20 +48,20 @@ public class DrawTo
             }
             else
             {
-                Console.WriteLine("Invalid coordinates. Please provide valid numbers for x and y.");
+                MessageBox.Show("Invalid coordinates. Please provide valid numbers for x and y.");
             }
         }
         catch (FormatException)
         {
-            Console.WriteLine("Invalid coordinates. Please provide valid numbers for x and y.");
+            MessageBox.Show("Invalid coordinates. Please provide valid numbers for x and y.");
         }
         catch (IndexOutOfRangeException)
         {
-            Console.WriteLine("Invalid 'drawto' command format. Use 'drawto x y'.");
+            MessageBox.Show("Invalid 'drawto' command format. Use 'drawto x y'.");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"An error occurred while processing the 'drawto' command: {ex.Message}");
+            MessageBox.Show($"An error occurred while processing the 'drawto' command: {ex.Message}");
         }
     }
 }

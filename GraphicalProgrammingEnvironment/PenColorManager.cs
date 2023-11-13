@@ -43,6 +43,7 @@ namespace GraphicalProgrammingEnvironment
                     currentPen.Color = penColor;
                     formInstance.Circle.SetPenColor(penColor); // Set color for Circle
                     formInstance.Triangle.SetPenColor(penColor); //sets pen color of triangle
+                
                 }
                 catch (Exception)
                 {
