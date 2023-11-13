@@ -9,19 +9,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace GraphicalProgrammingEnvironment
 {
+    /// <summary>
+    /// Main form for the graphical programming environment.
+    /// </summary>
     public partial class Form1 : Form
     {
         private List<string> commands = new List<string>(); //creating a list to store the commands
 
-        Bitmap myBitmap = new Bitmap(412, 302);
+        Bitmap myBitmap = new Bitmap(412, 302); //bitmap used for drawing
         public Point cursorPosition;
         public PenColorManager PenColorManager;
         public Circle Circle;
         public Triangle Triangle;
         public Rectangle Rectangle;
-       
+
+       /// <summary>
+       /// Initializing new instance of the <see cref="Form1"/> class.
+       /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -30,22 +37,35 @@ namespace GraphicalProgrammingEnvironment
             Circle = new Circle(this);
             Triangle = new Triangle(this);
             Rectangle = new Rectangle(this);
-            cursorPosition = new Point(0, 0); // Initialize cursorPosition
+            cursorPosition = new Point(0, 0); // Initializing the  cursorPosition
 
         }
 
-
+        /// <summary>
+        /// Event handler for the text box 1
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="e">The event arguments.</param>
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// Event handler for the text box 2 text changed event.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="e">The event arguments.</param>
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-
+        /// <summary>
+        /// When the button is clicked, proceeds to perform entered commands.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="e">The event arguments.</param>
         private void button3_Click(object sender, EventArgs e)
         {
             try
@@ -55,7 +75,7 @@ namespace GraphicalProgrammingEnvironment
 
                 if (!string.IsNullOrEmpty(textFromTextBox1) && string.IsNullOrEmpty(textFromTextBox2))
                 {
-                    // Get the command entered in the text box
+                    // Gets the command entered in the text box
                     string command = textBox1.Text.Trim();
                     ProcessCommand(command);
                 }
@@ -79,39 +99,65 @@ namespace GraphicalProgrammingEnvironment
             }
         }
 
-        
+        /// <summary>
+        /// Gets the drawing surface (Bitmap) used for drawing.
+        /// </summary>
+        /// <returns>The drawing surface Bitmap.</returns>
         public Bitmap GetDrawingSurface()
         {
             return myBitmap; //  myBitmap is the Bitmap being used for drawing
         }
 
-
+        /// <summary>
+        /// Refreshes the PictureBox, updating the displayed image.
+        /// </summary>
         public void RefreshPictureBox()
         {
             pictureBox1.Refresh();
         }
+
+        /// <summary>
+        /// Gets the current cursor position.
+        /// </summary>
         public Point CursorPosition
         {
             get { return cursorPosition; }
         }
 
+        /// <summary>
+        /// Gets the PictureBox used for drawing.
+        /// </summary>
+        /// <returns>The PictureBox.</returns>
         public PictureBox GetPictureBox()
         {
             return pictureBox1;
         }
 
+        /// <summary>
+        /// Sets the cursor position to the specified point.
+        /// </summary>
+        /// <param name="position">The new cursor position.</param>
         public void SetCursorPosition(Point position)
         {
             cursorPosition = position;
         }
 
+        /// <summary>
+        /// Gets the color of the pixel at the specified coordinates.
+        /// </summary>
+        /// <param name="x">The x-coordinate of the pixel.</param>
+        /// <param name="y">The y-coordinate of the pixel.</param>
+        /// <returns>The color of the pixel at the specified coordinates.</returns>
         public Color GetPixelColor(int x, int y)
         {
             return myBitmap.GetPixel(x, y);
         }
 
 
-
+        /// <summary>
+        /// Processes the entered command and performs the corresponding action.
+        /// </summary>
+        /// <param name="command">The command to be processed.</param>
         public void ProcessCommand(string command)
         {
             string newCommand = command.Replace(',', ' ');
@@ -143,7 +189,6 @@ namespace GraphicalProgrammingEnvironment
                         DrawTo drawTo = new DrawTo(this);
                         drawTo.ProcessDrawToCommand(commandPart);
                         break;
-
 
                     case "moveto":
                         CursorMove c = new CursorMove(this); // Passes the current instance of Form1
@@ -183,7 +228,12 @@ namespace GraphicalProgrammingEnvironment
         }
 
 
-
+        /// <summary>
+        /// Event handler for the PictureBox paint event.
+        /// Draws a yellow star centered around the cursor position.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="e">The event arguments.</param>
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             int starSize = 15; // Size of the star as needed
@@ -211,17 +261,26 @@ namespace GraphicalProgrammingEnvironment
                 }
             }
 
-            // Draw a Yellow star centered around the cursor position
+            // Draws a Yellow star centered around the cursor position
             e.Graphics.FillPolygon(Brushes.Yellow, starPoints);
         }
 
-
+        /// <summary>
+        /// Event handler for the PictureBox click event.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="e">The event arguments.</param>
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }
 
-        //for saving the program commands as a txt file
+        /// <summary>
+        /// Saves the program commands as a text file when save button is clicked.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="e">The event arguments.</param>
+       
         private void button2_Click(object sender, EventArgs e)
         {
             // Creates a SaveFileDialog to allow the user to choose the file location and name.
@@ -258,7 +317,12 @@ namespace GraphicalProgrammingEnvironment
 
         }
 
-        //for loading a txt file
+        /// <summary>
+        /// Loads a txt file when button1 or load button is clicked.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="e">The event arguments.</param>
+
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();

@@ -17,7 +17,7 @@ public class DrawTo
     {
         try
         {
-            // Ensures that the array has at least 3 elements and the second and third elements are valid integers
+            // Ensure that the array has at least 3 elements and the second and third elements are valid integers
             if (commandPart.Length == 3 && int.TryParse(commandPart[1], out int x) && int.TryParse(commandPart[2], out int y))
             {
                 Point startPoint = form.CursorPosition; // Gets the current cursor position

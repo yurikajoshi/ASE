@@ -1,0 +1,5 @@
+D:\ASE_yurikajoshi\GraphicalProgrammingEnvironment\Graphicalformtest\obj\Debug\net7.0\Graphicalformtest.csproj.AssemblyReference.cache
+D:\ASE_yurikajoshi\GraphicalProgrammingEnvironment\Graphicalformtest\obj\Debug\net7.0\Graphicalformtest.GeneratedMSBuildEditorConfig.editorconfig
+D:\ASE_yurikajoshi\GraphicalProgrammingEnvironment\Graphicalformtest\obj\Debug\net7.0\Graphicalformtest.AssemblyInfoInputs.cache
+D:\ASE_yurikajoshi\GraphicalProgrammingEnvironment\Graphicalformtest\obj\Debug\net7.0\Graphicalformtest.AssemblyInfo.cs
+D:\ASE_yurikajoshi\GraphicalProgrammingEnvironment\Graphicalformtest\obj\Debug\net7.0\Graphicalformtest.csproj.CoreCompileInputs.cache
