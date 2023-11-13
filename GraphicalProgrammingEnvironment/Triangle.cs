@@ -5,15 +5,26 @@ using System.Windows.Forms;
 
 namespace GraphicalProgrammingEnvironment
 {
+    /// <summary>
+    /// Represents a class responsible for drawing triangles in the graphical programming environment.
+    /// </summary>
     public class Triangle : Shape
     {
         private Color currentPenColor; // Stores current pen color
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Triangle"/> class.
+        /// </summary>
+        /// <param name="form">The main form instance.</param>
         public Triangle(Form1 form) : base(form)
         {
             currentPenColor = Color.Yellow; // Default pen color is yellow
         }
 
+        /// <summary>
+        /// Processes the 'triangle' command, drawing an equilateral triangle with the specified side length.
+        /// </summary>
+        /// <param name="commandPart">An array containing the command parts.</param>
         public void ProcessTriangleCommand(string[] commandPart)
         {
             try
@@ -42,6 +53,10 @@ namespace GraphicalProgrammingEnvironment
             }
         }
 
+        /// <summary>
+        /// Draws an equilateral triangle with the specified side length at the current cursor position.
+        /// </summary>
+        /// <param name="sideLength">The side length of the equilateral triangle.</param>
         private void DrawTriangle(int sideLength)
         {
             PictureBox pictureBox = formInstance.GetPictureBox();
@@ -67,6 +82,10 @@ namespace GraphicalProgrammingEnvironment
             }
         }
 
+        /// <summary>
+        /// Sets the current pen color for drawing triangles.
+        /// </summary>
+        /// <param name="color">The color to set.</param>
         // Sets the current pen color
         public void SetPenColor(Color color)
         {
