@@ -40,11 +40,8 @@ namespace GraphicalProgrammingEnvironment
             cursorPosition = new Point(0, 0); // Initializing the  cursorPosition
 
         }
-        public bool IsFillEnabled
-        {
-            get { return isFillEnabled; }
-        }
 
+    
         /// <summary>
         /// Event handler for the text box 1
         /// </summary>
@@ -113,6 +110,18 @@ namespace GraphicalProgrammingEnvironment
         }
 
         /// <summary>
+        /// Gets a value indicating whether this instance is enabled (i.e, fillenabled).
+        /// </summary>
+        /// </value>
+        /// <c>true<c/>if this isntace is fill enabled, else <c>false</c>
+        /// </value>
+        public bool IsFillEnabled
+        {
+            get { return isFillEnabled; }
+        }
+
+
+        /// <summary>
         /// Refreshes the PictureBox, updating the displayed image.
         /// </summary>
         public void RefreshPictureBox()
@@ -160,6 +169,7 @@ namespace GraphicalProgrammingEnvironment
 
         /// <summary>
         /// Processes the entered command and performs the corresponding action.
+        /// The execution of fill on/off based on command given is present as well.
         /// </summary>
         /// <param name="command">The command to be processed.</param>
         public void ProcessCommand(string command)
@@ -208,7 +218,6 @@ namespace GraphicalProgrammingEnvironment
                         cursorPosition = new Point(0, 0); // Assuming cursorPosition is declared globally
                         pictureBox1.Refresh(); // Refresh the PictureBox to reflect the new cursor position
                         break;
-
                     case "fill":
                         if (commandPart.Length > 1)
                         {

@@ -65,6 +65,10 @@
               "target": "Package",
               "version": "[4.20.69, )"
             },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "coverlet.collector": {
               "target": "Package",
               "version": "[3.2.0, )"

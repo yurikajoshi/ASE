@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hFVpGhNuukecxB2n+zqKBKVzHQWO4R0MxU7DxpKl7+iCMyQ8u0Cmac2YWuP50dIAqNNYsZMzib3FpYAHRUUBAw==",
+  "dgSpecHash": "h4uJlpApSnF6VH/RTWrrZ7T0ulT+JHItvQ4Xapevn4TLOrnnBWuPWWYgNBdclkfwTnrZYrucnwJtwUFbI3oBKw==",
   "success": true,
   "projectFilePath": "D:\\ASE_yurikajoshi\\GraphicalProgrammingEnvironment\\Graphicalformtest\\Graphicalformtest.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,7 @@
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.testplatform.objectmodel\\17.7.1\\microsoft.testplatform.objectmodel.17.7.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.testplatform.testhost\\17.7.1\\microsoft.testplatform.testhost.17.7.1.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\moq\\4.20.69\\moq.4.20.69.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\mstest.testadapter\\2.2.10\\mstest.testadapter.2.2.10.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\mstest.testframework\\2.2.10\\mstest.testframework.2.2.10.nupkg.sha512",
@@ -23,6 +24,7 @@
     "C:\\Users\\HP\\.nuget\\packages\\system.diagnostics.eventlog\\6.0.0\\system.diagnostics.eventlog.6.0.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\system.diagnostics.textwritertracelistener\\4.3.0\\system.diagnostics.textwritertracelistener.4.3.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\system.diagnostics.tracesource\\4.3.0\\system.diagnostics.tracesource.4.3.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\system.globalization\\4.3.0\\system.globalization.4.3.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\system.io\\4.3.0\\system.io.4.3.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
